@@ -6,39 +6,39 @@ from typing import Any
 
 from platformdirs import user_config_dir
 
-APP_NAME = "VaultPy"
 
-CONFIG_DIR = Path(user_config_dir(APP_NAME))
-SESSION_FILE = CONFIG_DIR / "session.json"
+class SessionManager:
+    def __init__(self, app_name: str = "PyVault") -> None:
+        self.config_dir = Path(user_config_dir(app_name))
+        self.session_file = self.config_dir / "session.json"
+
+    def save(self, session: dict[str, Any]) -> None:
+        """Save the current session to disk."""
+
+        self.config_dir.mkdir(parents=True, exist_ok=True)
+
+        with self.session_file.open("w") as file:
+            json.dump(session, file, indent=4)
+
+    def load(self) -> dict[str, Any] | None:
+        """Load the saved session."""
+
+        if not self.session_file.exists():
+            return None
+
+        with self.session_file.open() as file:
+            return json.load(file)
+
+    def clear(self) -> None:
+        """Delete the saved session."""
+
+        if self.session_file.exists():
+            self.session_file.unlink()
+
+    def exists(self) -> bool:
+        """Return True if a session exists."""
+
+        return self.session_file.exists()
 
 
-def save_session(session: dict[str, Any]) -> None:
-    """Save the current session to disk."""
-
-    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
-
-    with SESSION_FILE.open("w") as file:
-        json.dump(session, file, indent=4, default=str)
-
-
-def load_session() -> dict[str, Any] | None:
-    """Load the saved session."""
-
-    if not SESSION_FILE.exists():
-        return None
-
-    with SESSION_FILE.open() as file:
-        return json.load(file)
-
-
-def clear_session() -> None:
-    """Delete the saved session."""
-
-    if SESSION_FILE.exists():
-        SESSION_FILE.unlink()
-
-
-def has_session() -> bool:
-    """Return True if a saved session exists."""
-
-    return SESSION_FILE.exists()
+session_manager = SessionManager()

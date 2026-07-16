@@ -1,5 +1,5 @@
 from rich.console import Console
-from app.auth import login as login_user
+from app.auth import login as login_user, whoami as whoami_user
 import typer
 
 app = typer.Typer(
@@ -26,6 +26,21 @@ def version():
 def login():
     """Login to your PyVault account."""
     login_user()
+
+# Show Current User
+@app.command()
+def whoami():
+    """Show current user."""
+    whoami_user()
+
+
+@app.command()
+def logout():
+    """Logout from your PyVault account."""
+    from app.session import session_manager
+
+    session_manager.clear()
+    console.print("[green]✓ Logged out successfully![/green]")
 
 
 # View source 
