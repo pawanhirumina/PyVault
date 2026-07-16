@@ -1,6 +1,6 @@
 import typer
 from rich.console import Console
-
+from app.session import save_session
 from app.database import client
 
 console = Console()
@@ -25,7 +25,8 @@ def login() -> None:
 
         console.print(
             f"[green]✓ Logged in successfully![/green] "
-            f"Welcome [bold]{response.user.email}[/bold]"
+            f"Welcome [bold]{response.user.email}[/bold]",
+            save_session(response.session.model_dump())
         )
 
     except Exception as e:
