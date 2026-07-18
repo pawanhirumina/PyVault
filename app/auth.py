@@ -1,11 +1,14 @@
 import typer
 from rich.console import Console
 
+
 from app.database import client
 from app.session import session_manager
 
 console = Console()
 
+from app.database import client
+from app.session import session_manager
 
 def login() -> None:
     """Authenticate with Supabase."""
@@ -16,6 +19,15 @@ def login() -> None:
         hide_input=True,
     )
 
+
+console = Console()
+
+
+def login() -> None:
+    """Authenticate with Supabase."""
+
+    email = typer.prompt("Email")
+    password = typer.prompt("Password")
     try:
         response = client.auth.sign_in_with_password(
             {
@@ -32,6 +44,7 @@ def login() -> None:
             f"[green]✓ Logged in successfully![/green] "
             f"Welcome [bold]{response.user.email}[/bold]"
         )
+    
 
     except Exception as e:
         console.print("[bold red]Login failed[/bold red]")
