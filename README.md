@@ -1,4 +1,6 @@
-### **PyVault**
+
+## PyVault
+
 
 A lightweight, CLI-based password manager inspired by Bitwarden.
 Built for personal use - secure, simple, and fully under your control. Clone it, connect your own database, and own your vault.
