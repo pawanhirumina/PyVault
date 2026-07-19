@@ -4,7 +4,15 @@ env_manager.load()
 from rich.console import Console
 from vaultpy.auth import login as login_user, whoami as whoami_user
 from vaultpy import __version__
+from vaultpy.vault import reset_vault
 import typer
+
+from vaultpy.vault import (
+    add_password,
+    list_passwords,
+    remove_password,
+    get_password,
+)
 
 app = typer.Typer(
     help="PyVault - CLI Secure Password Manager",
@@ -53,6 +61,39 @@ def source():
 def ping():
     from vaultpy.database import  get_client
     console.print("[green]✓ Connected to Supabase[/green]")
+
+
+# CRUD Commands
+
+@app.command("add", help="Save a new password. [a]")
+@app.command("a", hidden=True)
+def add():
+    add_password()
+
+
+@app.command("list", help="List saved passwords. [ls]")
+@app.command("ls", hidden=True)
+def list():
+    list_passwords()
+
+
+@app.command("remove", help="Remove a password. [rm]")
+@app.command("rm", hidden=True)
+def remove():
+    remove_password()
+
+
+@app.command("get", help="Show a saved password.")
+def get():
+    get_password()
+
+
+@app.command(
+    "reset",
+    help="Delete all vault data and start fresh."
+)
+def reset():
+    reset_vault()
 
 if __name__ == "__main__":
     app()

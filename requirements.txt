@@ -18,6 +18,7 @@ multidict==6.7.1
 packaging==26.2
 platformdirs==4.10.0
 postgrest==2.31.0
+prompt_toolkit==3.0.52
 propcache==0.5.2
 pycparser==3.0
 pydantic==2.13.4
@@ -26,6 +27,8 @@ Pygments==2.20.0
 PyJWT==2.13.0
 pyperclip==1.11.0
 python-dotenv==1.2.2
+-e git+https://github.com/pawanhirumina/PyVault.git@8874f03a96a15ca76e2384109b26c28e9561ee4d#egg=pyvault_cli
+questionary==2.1.1
 realtime==2.31.0
 rich==15.0.0
 shellingham==1.5.4
@@ -37,5 +40,7 @@ supabase-functions==2.31.0
 typer==0.26.8
 typing-inspection==0.4.2
 typing_extensions==4.16.0
+-e git+https://github.com/pawanhirumina/PyVault.git@8874f03a96a15ca76e2384109b26c28e9561ee4d#egg=vaultpy
+wcwidth==0.8.2
 websockets==15.0.1
 yarl==1.24.2
