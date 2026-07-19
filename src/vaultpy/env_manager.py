@@ -4,7 +4,7 @@ from platformdirs import user_config_dir
 from dotenv import load_dotenv, set_key, get_key, dotenv_values
 
 class EnvManager:
-    def __init__(self, app_name: str = "PyVault", filename: str = "supabase.env"):
+    def __init__(self, app_name: str = "pyvault", filename: str = "supabase.env"):
         self.config_dir = Path(user_config_dir(app_name))
         self.env_file = self.config_dir / filename
 
@@ -34,9 +34,9 @@ class EnvManager:
     def all(self) -> dict:
         self.ensure()
         return dotenv_values(self.env_file)
-
+    
     def clear(self):
-        if self.env_file.exists():
-            self.env_file.unlink()
+        self.ensure()
+        self.env_file.write_text("")
 
 env_manager = EnvManager()

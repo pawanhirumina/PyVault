@@ -1,6 +1,9 @@
+
+from vaultpy.env_manager import env_manager
+env_manager.load()
 from rich.console import Console
-from app.auth import login as login_user, whoami as whoami_user
-from app import __version__
+from vaultpy.auth import login as login_user, whoami as whoami_user
+from vaultpy import __version__
 import typer
 
 app = typer.Typer(
@@ -36,7 +39,7 @@ def whoami():
 @app.command("logout", help="Logout from your PyVault account. [lo]")
 @app.command("lo", hidden=True)
 def logout():
-    from app.session import session_manager
+    from vaultpy.session import session_manager
     session_manager.clear()
     console.print("[green]✓ Logged out successfully![/green]")
 
@@ -48,7 +51,7 @@ def source():
 @app.command("ping", help="Test the Supabase connection. [p]")
 @app.command("p", hidden=True)
 def ping():
-    from app.database import client
+    from vaultpy.database import  get_client
     console.print("[green]✓ Connected to Supabase[/green]")
 
 if __name__ == "__main__":

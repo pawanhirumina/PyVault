@@ -8,8 +8,8 @@ from platformdirs import user_config_dir
 
 
 class SessionManager:
-    def __init__(self, app_name: str = "PyVault") -> None:
-        self.config_dir = Path(user_config_dir(app_name))
+    def __init__(self, app_name: str = "pyvault") -> None:
+        self.config_dir = Path.home() / ".config" / app_name
         self.session_file = self.config_dir / "session.json"
 
     def save(self, session: dict[str, Any]) -> None:

@@ -1,9 +1,9 @@
 from dataclasses import dataclass
+import os
+
 from os import getenv
 
-from dotenv import load_dotenv
 
-load_dotenv()
 
 
 @dataclass(frozen=True)
@@ -13,6 +13,6 @@ class Settings:
 
 
 settings = Settings(
-    supabase_url=getenv("SUPABASE_URL", ""),
-    supabase_key=getenv("SUPABASE_KEY", ""),
+    supabase_url = os.getenv("SUPABASE_URL"),
+    supabase_key = os.getenv("SUPABASE_KEY")
 )
